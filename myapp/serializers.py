@@ -1,3 +1,4 @@
+from dataclasses import fields
 from rest_framework import serializers
 from .models import Customer, Order, Shipping
 
@@ -15,3 +16,18 @@ class ShippingSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Shipping
         fields = ['id','customer_id','address','city','pincode']
+
+
+class CustomerOrderSerilizer(serializers.ModelSerializer):
+    order = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Customer
+        fields = ['id','customer_name','email','mobile_number','city','order']
+
+    def get_order(self, obj):
+            orders = Order.objects.filter(
+                customer=obj.id)
+            serializer = OrderSerilizer(orders, many=True)
+    
+            return serializer.data

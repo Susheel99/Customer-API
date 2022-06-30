@@ -11,7 +11,7 @@ class Customer(models.Model):
     city = models.CharField(max_length=100)
 
 class Order(models.Model):
-    customer_id = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True)
+    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True)
     product_name = models.CharField(max_length=200)
     quantity = models.IntegerField()
     pricing = models.IntegerField()

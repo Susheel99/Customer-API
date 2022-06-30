@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from .models import Customer, Order, Shipping
 from django.http import JsonResponse
-from .serializers import CustomerSerilizer, OrderSerilizer, ShippingSerilizer
+from .serializers import CustomerOrderSerilizer, CustomerSerilizer, OrderSerilizer, ShippingSerilizer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -57,4 +57,15 @@ class CityView(APIView):
        return JsonResponse({"Shipping Address": list(address)},safe=False)
 
 
+
+@api_view(['GET'])
+def customer_purchase(request):
+    if request.method == 'GET':
+        customers=Customer.objects.all()
+        serializer = CustomerOrderSerilizer(customers, many=True)
+        #print(serializer.data)
+        return JsonResponse(serializer.data, safe=False)
+
+
+    
     
