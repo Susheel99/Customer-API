@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from .models import Customer, Order, Shipping
 from django.http import JsonResponse
-from .serializers import CustomerOrderSerilizer, CustomerSerilizer, OrderSerilizer, ShippingSerilizer
+from .serializers import CustomerOrderSerilizer, CustomerOrderShippingSerilizer, CustomerSerilizer, OrderSerilizer, ShippingSerilizer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -66,6 +66,13 @@ def customer_purchase(request):
         #print(serializer.data)
         return JsonResponse(serializer.data, safe=False)
 
+@api_view(['GET'])
+def customer_purchase_shipping(request):
+    if request.method == 'GET':
+        orders=Order.objects.all()
+        serializer = CustomerOrderShippingSerilizer(orders, many=True)
+        #print(serializer.data)
+        return JsonResponse(serializer.data, safe=False)
 
     
     

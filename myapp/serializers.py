@@ -31,3 +31,25 @@ class CustomerOrderSerilizer(serializers.ModelSerializer):
             serializer = OrderSerilizer(orders, many=True)
     
             return serializer.data
+
+class CustomerOrderShippingSerilizer(serializers.ModelSerializer):
+    Customer = serializers.SerializerMethodField()
+    shipping = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Order
+        fields = ['Customer','id','customer','product_name','quantity','pricing','mrp','shipping']
+
+    def get_Customer(self, obj):
+            customers = Customer.objects.filter(
+                id = obj.customer.id)
+            serializer = CustomerSerilizer(customers, many=True)
+    
+            return serializer.data
+
+    def get_shipping(self, obj):
+            shipping = Shipping.objects.filter(
+                purchase_order = obj.id)
+            serializer = ShippingSerilizer(shipping, many=True)
+    
+            return serializer.data
