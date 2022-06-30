@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+
 # Create your views here.
 
 @api_view(['POST'])
@@ -37,7 +38,7 @@ def purchase_order(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
-def purchase_order(request):
+def shipping_details(request):
     if request.method == 'GET':
         customers=Shipping.objects.all()
         serializer = ShippingSerilizer(customers, many=True)
@@ -47,7 +48,9 @@ def purchase_order(request):
         serializer = ShippingSerilizer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class CityView(APIView):
     def get(self, request, **kwargs):

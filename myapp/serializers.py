@@ -10,12 +10,12 @@ class CustomerSerilizer(serializers.ModelSerializer):
 class OrderSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['id','customer_id','product_name','quantity','pricing','mrp']
+        fields = ['id','customer','product_name','quantity','pricing','mrp']
 
 class ShippingSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Shipping
-        fields = ['id','customer_id','address','city','pincode']
+        fields = ['id','customer','address','city','pincode']
 
 
 class CustomerOrderSerilizer(serializers.ModelSerializer):

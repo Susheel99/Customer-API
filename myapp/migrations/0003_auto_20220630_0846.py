@@ -5,7 +5,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
+    atomic = False 
     dependencies = [
         ('myapp', '0002_rename_customers_customer'),
     ]

@@ -23,6 +23,3 @@ class Shipping(models.Model):
     address = models.CharField(max_length=500)
     city = models.CharField(max_length=100)
     pincode = models.CharField(max_length=50)
-
-
-    
