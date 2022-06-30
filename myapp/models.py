@@ -18,13 +18,11 @@ class Order(models.Model):
     mrp = models.IntegerField()
 
 class Shipping(models.Model):
-    customer_id = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True)
-    purchase_order_id = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True)
+    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True)
+    purchase_order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True)
     address = models.CharField(max_length=500)
     city = models.CharField(max_length=100)
     pincode = models.CharField(max_length=50)
-
-
 
 
     

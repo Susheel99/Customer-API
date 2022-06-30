@@ -1,4 +1,7 @@
-django
+django>=3.2
 djangorestframework
 markdown       
 django-filter  
+django-cors-headers
+dnspython
+djongo
